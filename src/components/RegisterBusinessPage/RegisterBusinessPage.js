@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
-class RegisterPage extends Component {
+class RegisterBusinessPage extends Component {
   state = {
     username: '',
     password: '',
     businessName: '',
     email: '',
+    phoneNumber: '',
     address: '',
   };
 
@@ -22,6 +23,7 @@ class RegisterPage extends Component {
           password: this.state.password,
           businessName: this.state.businessName,
           email: this.state.email,
+          phoneNumber: this.state.phoneNumber,
           address: this.state.address
         },
       });
@@ -72,6 +74,51 @@ class RegisterPage extends Component {
             </label>
           </div>
           <div>
+            <label htmlFor="businessName">
+              Official Name of Establishment:
+              <input
+                type="text"
+                name="businessName"
+                value={this.state.businessName}
+                onChange={this.handleInputChangeFor('businessName')}
+              />
+            </label>
+          </div>
+          <div>
+            <label htmlFor="email">
+              Email Address:
+              <input
+                type="text"
+                name="email"
+                value={this.state.email}
+                onChange={this.handleInputChangeFor('email')}
+              />
+            </label>
+          </div>
+          <div>
+            <label htmlFor="phoneNumber">
+              Business Phone Number:
+              <input
+                type="text"
+                name="phoneNumber"
+                value={this.state.phoneNumber}
+                onChange={this.handleInputChangeFor('phoneNumber')}
+              />
+            </label>
+          </div>
+          <div>
+            <label htmlFor="address">
+              Business Address:
+              <input
+                type="text"
+                name="address"
+                placeholder="enter street, city, state"
+                value={this.state.address}
+                onChange={this.handleInputChangeFor('address')}
+              />
+            </label>
+          </div>
+          <div>
             <input
               className="register"
               type="submit"
@@ -94,5 +141,5 @@ class RegisterPage extends Component {
   }
 }
 
-export default connect(mapStoreToProps)(RegisterPage);
+export default connect(mapStoreToProps)(RegisterBusinessPage);
 
