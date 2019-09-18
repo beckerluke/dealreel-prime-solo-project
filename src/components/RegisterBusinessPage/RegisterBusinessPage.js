@@ -6,6 +6,9 @@ class RegisterPage extends Component {
   state = {
     username: '',
     password: '',
+    businessName: '',
+    email: '',
+    address: '',
   };
 
   registerUser = (event) => {
@@ -17,6 +20,9 @@ class RegisterPage extends Component {
         payload: {
           username: this.state.username,
           password: this.state.password,
+          businessName: this.state.businessName,
+          email: this.state.email,
+          address: this.state.address
         },
       });
     } else {
@@ -42,7 +48,7 @@ class RegisterPage extends Component {
           </h2>
         )}
         <form onSubmit={this.registerUser}>
-          <h1>Register User</h1>
+          <h1>Register Business</h1>
           <div>
             <label htmlFor="username">
               Username:

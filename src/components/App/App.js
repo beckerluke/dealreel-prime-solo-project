@@ -18,7 +18,7 @@ import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
-import RegisterPage from '../RegisterPage/RegisterPage';
+import RegisterBusinessPage from '../RegisterBusinessPage/RegisterBusinessPage';
 
 import './App.css';
 
@@ -75,7 +75,7 @@ class App extends Component {
               exact
               path="/registration"
               authRedirect="/admin"
-              component={RegisterPage}
+              component={RegisterBusinessPage}
             />
 
             {/* If none of the other routes matched, we will show a 404. */}
