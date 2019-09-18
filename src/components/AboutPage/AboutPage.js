@@ -9,7 +9,11 @@ const AboutPage = () => (
   <div>
     <div>
       <p>
-        This about page is for anyone to read!
+        DealReel is a promotional platform where businesses can create and set real-time deals in a quick and efficient manner.
+        DealReel will give a business the flexibility to broadcast these real-time deals to all of their potential patrons near their area.
+      </p>
+      <p>
+        DealReel gives patrons an easy, one-stop-shop to surf all of the current deals going on in their area.
       </p>
     </div>
   </div>
