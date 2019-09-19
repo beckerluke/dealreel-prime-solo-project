@@ -8,6 +8,10 @@ class LandingPage extends Component {
     state = {
         heading: 'Class Component',
     };
+    
+    componentDidMount() {
+        this.props.dispatch({type: 'FETCH_ALL_DEALS'});
+    }
 
     onLogin = (event) => {
         this.props.history.push('/login');
