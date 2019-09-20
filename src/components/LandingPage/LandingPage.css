@@ -116,3 +116,8 @@ Grid
     flex-basis: 100%;
     max-width: 100%;
 }
+
+/*---Deal Card---*/
+.dealCard {
+    background-color: #30e639;
+}

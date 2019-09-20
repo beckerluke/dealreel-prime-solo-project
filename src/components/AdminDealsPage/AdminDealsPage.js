@@ -1,25 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
-import { Button } from '@material-ui/core/'
 
-import './LandingPage.css';
-
-class LandingPage extends Component {
+class AdminDealsPage extends Component {
     state = {
-        heading: 'ALL DEALS HAPPENING AROUND YOU',
+        heading: 'Your Deals!',
     };
-    
-    componentDidMount() {
-        this.props.dispatch({type: 'FETCH_ALL_DEALS'});
-    }
 
-    onLogin = (event) => {
-        this.props.history.push('/login');
+    componentDidMount() {
+        this.props.dispatch({type: 'FETCH_ADMIN_DEALS'});
     }
 
     render() {
-        const allDeals = this.props.store.deals.map((dealCard, index) => {
+        const allAdminDeals = this.props.store.deals.map((dealCard, index) => {
             return (
                 // this will be the deal cards and eventually be made their own component
                 <div className="dealCard" key={index}>
@@ -31,24 +24,14 @@ class LandingPage extends Component {
                 </div>
             )
         });
-        
+
         return (
             <div className="container">
                 <h2>{this.state.heading}</h2>
 
                 <div className="grid">
                     <div className="grid-col grid-col_8">
-                        {allDeals}
-                    </div>
-                    <div className="grid-col grid-col_4">
-                        <h3>Already a Member?</h3>
-                        <Button
-                            variant="outlined"
-                            color="primary"
-                            onClick={this.onLogin}
-                        >
-                            Login
-                        </Button>
+                        {allAdminDeals}
                     </div>
                 </div>
             </div>
@@ -56,4 +39,4 @@ class LandingPage extends Component {
     }
 }
 
-export default connect(mapStoreToProps)(LandingPage);
+export default connect(mapStoreToProps)(AdminDealsPage);

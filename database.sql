@@ -11,15 +11,16 @@ CREATE TABLE "user" (
     "email" VARCHAR UNIQUE NOT NULL,
     "phone_number" INTEGER (255),
     "address" VARCHAR UNIQUE NOT NULL,
-    "type" VARCHAR (100)
+    "type" VARCHAR (100),
+    "sec_level" INTEGER DEFAULT 1
 );
 
 CREATE TABLE "deals" (
-    "id" serial primary key,
-    "start_time" timestamp,
-    "end_time" timestamp,
-    "description" varchar(100) not null,
-    "location" varchar(255) not null
+    "id" SERIAL PRIMARY KEY,
+    "start_time" TIMESTAMP,
+    "end_time" TIMESTAMP,
+    "description" VARCHAR(100) not null,
+    "location" VARCHAR(255) not null
 );
 
 CREATE TABLE "user_deals" (
