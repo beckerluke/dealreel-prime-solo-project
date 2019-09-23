@@ -60,8 +60,29 @@ router.get('/admin', (req, res) => {
 /**
  * POST route template
  */
-router.post('/', (req, res) => {
-
+router.post('/admin/add/deal', (req, res) => {
+    const newDeal = req.body;
+    const dealID = req.user.id
+    console.log(newDeal);
+    console.log(dealID)
+    
+    const queryText = `INSERT INTO "deals" ("start_time", "end_time", 
+                    "description", "user_id", "redemptions_limit", "image_file_selected")
+                    VALUES ($1, $2, $3, $4, $5, $6);`;
+    const queryValues = [
+        newDeal.startTime,
+        newDeal.endTime,
+        newDeal.description,
+        dealID,
+        parseInt(newDeal.redemptionsLimit),
+        newDeal.imageFileSelected
+    ];
+    pool.query(queryText, queryValues)
+      .then(() => { res.sendStatus(201); })
+      .catch((err) => {
+          console.log('ERROR POSTING DEAL TO DB', err);
+          res.sendStatus(500);
+    });
 });
 
 module.exports = router;

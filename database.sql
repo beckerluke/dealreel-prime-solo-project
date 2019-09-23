@@ -16,11 +16,14 @@ CREATE TABLE "user" (
 );
 
 CREATE TABLE "deals" (
-    "id" SERIAL PRIMARY KEY,
-    "start_time" TIMESTAMP,
-    "end_time" TIMESTAMP,
-    "description" VARCHAR(100) not null,
-    "location" VARCHAR(255) not null
+CREATE TABLE deals (
+    id SERIAL PRIMARY KEY,
+    start_time timestamp without time zone,
+    end_time timestamp without time zone,
+    description character varying(100) NOT NULL,
+    user_id integer REFERENCES user(id),
+    redemptions_limit integer NOT NULL DEFAULT 0,
+    image_file_selected text
 );
 
 CREATE TABLE "user_deals" (
