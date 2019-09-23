@@ -28,12 +28,6 @@ class App extends Component {
 
   render() {
     
-    // Gets the current date and time of the day
-    let today = new Date();
-    let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-    let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-    let dateTime = date+' '+time;
-
     return (
       <Router>
         <div>
@@ -61,7 +55,6 @@ class App extends Component {
               exact
               path="/admin"
               component={AdminDealsPage}
-              currentDate={dateTime}
             />
             <ProtectedRoute
               exact
