@@ -32,8 +32,6 @@ function* fetchAdminDeals(action) {
       yield put({type: 'SET_ADMIN_DEALS', payload: response.data});
     } catch (error) {
         console.log('Error with getting admin deals:', error);
-        
-        alert('There was an error loading your deals')
     }
   }
   

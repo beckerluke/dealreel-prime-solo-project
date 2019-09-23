@@ -12,7 +12,11 @@ class AdminDealsPage extends Component {
     }
 
     render() {
-        const allAdminDeals = this.props.store.deals.map((dealCard, index) => {
+        let allAdminDeals = this.props.store.deals;
+        if (allAdminDeals.length === 0) {
+            return (<h2>You don't have any deals</h2>)
+        } 
+        allAdminDeals = this.props.store.deals.map((dealCard, index) => {
             return (
                 // this will be the deal cards and eventually be made their own component
                 <div className="dealCard" key={index}>
@@ -23,7 +27,8 @@ class AdminDealsPage extends Component {
                     <p>{dealCard.location}</p>
                 </div>
             )
-        });
+        }) 
+        ;
 
         return (
             <div className="container">

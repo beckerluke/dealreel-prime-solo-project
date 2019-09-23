@@ -27,7 +27,10 @@ router.post('/register', (req, res, next) => {
                     VALUES ($1, $2, $3, $4, $5, $6) RETURNING id;`;
   pool.query(queryText, [username, password, businessName, email, phoneNumber, address])
     .then(() => res.sendStatus(201))
-    .catch(() => res.sendStatus(500));
+    .catch((error) => {
+      console.log(error);
+      
+      res.sendStatus(500)});
 });
 
 // Handles login form authenticate/login POST
