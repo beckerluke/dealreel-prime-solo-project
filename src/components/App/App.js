@@ -20,6 +20,7 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterBusinessPage from '../RegisterBusinessPage/RegisterBusinessPage';
 import AdminDealsPage from '../AdminDealsPage/AdminDealsPage';
+import AddDealPage from '../AddDealPage/AddDealPage';
 
 import './App.css';
 
@@ -61,6 +62,11 @@ class App extends Component {
               path="/admin"
               component={AdminDealsPage}
               currentDate={dateTime}
+            />
+            <ProtectedRoute
+              exact
+              path="/add/deal"
+              component={AddDealPage}
             />
             {/* This works the same as the other protected route, except that if the user is logged in,
             they will see the info page instead. */}
