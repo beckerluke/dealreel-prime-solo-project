@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
                     ORDER BY "user"."id", "end_time" DESC;`;
 
     const currentDateTime = moment().format();
-    const cutOffDate = moment().add(1, 'days');
+    const cutOffDate = moment().add(8, 'hours');
 
     pool.query(queryText,[currentDateTime, cutOffDate]).then(result => {
       // Sends back the results in an object
