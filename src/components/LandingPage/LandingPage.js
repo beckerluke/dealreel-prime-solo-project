@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
-import { Button } from '@material-ui/core/'
+import { Button } from '@material-ui/core/';
+import moment from 'moment';
 
 import './LandingPage.css';
 
@@ -19,6 +20,7 @@ class LandingPage extends Component {
     }
 
     render() {
+        
         const allDeals = this.props.store.deals.map((dealCard, index) => {
             return (
                 // this will be the deal cards and eventually be made their own component

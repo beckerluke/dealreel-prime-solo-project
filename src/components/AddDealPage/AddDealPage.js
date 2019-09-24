@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
-import {TextField, Button} from '@material-ui/core';
+import {TextField} from '@material-ui/core';
 import moment from 'moment';
 
 class AddDeal extends Component {
@@ -24,6 +24,16 @@ class AddDeal extends Component {
     submitDeal = event => {
         event.preventDefault();
 
+        // checks to make sure user enters start time after current date time
+        if ( moment().isAfter(this.state.startTime) ) {
+            return alert('Invalid start time entered')
+        }
+
+        // checks to make sure user enters end time after the start time
+        if (moment(this.state.startTime).isAfter(this.state.endTime)) {
+            return alert('Invalid selection for start and end times');
+        }
+
         this.props.dispatch({type: 'ADD_DEAL', 
             payload: {
                 startTime: this.state.startTime,
@@ -44,7 +54,7 @@ class AddDeal extends Component {
     
 
     render() {
-        
+
         // current date and time down to seconds converted to just minutes
         const convertedDateTime = moment().format('YYYY-MM-DDTkk:mm');  
         return (
