@@ -20,15 +20,15 @@ class LandingPage extends Component {
     }
 
     render() {
-        
+
         const allDeals = this.props.store.deals.map((dealCard, index) => {
             return (
                 // this will be the deal cards and eventually be made their own component
                 <div className="dealCard" key={index}>
                     <h2>{dealCard.business_name}</h2>
                     <h3>{dealCard.description}</h3>
-                    <p>{dealCard.start_time}</p>
-                    <p>{dealCard.end_time}</p>
+                    <p>{moment(dealCard.start_time).endOf('day').fromNow()}</p>
+                    <p>{moment(dealCard.start_time).format('hh:mm:ss A')} TO {moment(dealCard.end_time).format('hh:mm:ss A')}</p>
                     <p>{dealCard.location}</p>
                 </div>
             )
@@ -37,7 +37,7 @@ class LandingPage extends Component {
         return (
             <div className="container">
                 <h2>{this.state.heading}</h2>
-
+                <h3>{moment().format('LLLL')}</h3>
                 <div className="grid">
                     <div className="grid-col grid-col_8">
                         {allDeals}

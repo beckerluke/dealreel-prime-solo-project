@@ -1,6 +1,7 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+const moment = require('moment');
 
 /**
  * GET all deals from database
@@ -8,8 +9,13 @@ const router = express.Router();
 router.get('/', (req, res) => {
     let queryText = `SELECT * FROM "deals" 
                     JOIN "user" ON "user".id = "deals"."user_id"
-                    ORDER BY "end_time";`;
-    pool.query(queryText).then(result => {
+                    WHERE "start_time" > $1 AND "end_time" < $2
+                    ORDER BY "user"."id", "end_time" DESC;`;
+
+    const currentDateTime = moment().format();
+    const cutOffDate = moment().add(1, 'days');
+
+    pool.query(queryText,[currentDateTime, cutOffDate]).then(result => {
       // Sends back the results in an object
       res.send(result.rows);
     })
@@ -34,9 +40,9 @@ router.get('/admin', (req, res) => {
 
             let queryText = `SELECT * FROM "deals" 
                             JOIN "user" ON "user".id = "deals"."user_id"
-                            WHERE "user".id = $1;`;
+                            WHERE "user".id = $1
+                            ORDER BY "user"."id", "end_time" DESC;`;
             
-
             const dealID = req.user.id; 
             console.log('USER ID:', req.user.id);
 

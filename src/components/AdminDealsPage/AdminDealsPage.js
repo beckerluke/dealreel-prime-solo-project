@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
+import moment from 'moment';
 
 class AdminDealsPage extends Component {
     state = {
@@ -11,6 +12,7 @@ class AdminDealsPage extends Component {
         this.props.dispatch({type: 'FETCH_ADMIN_DEALS'});
     }
 
+    
     render() {
         let allAdminDeals = this.props.store.deals;
         if (allAdminDeals.length === 0) {
@@ -22,8 +24,9 @@ class AdminDealsPage extends Component {
                 <div className="dealCard" key={index}>
                     <h2>{dealCard.business_name}</h2>
                     <h3>{dealCard.description}</h3>
-                    <p>{dealCard.start_time}</p>
-                    <p>{dealCard.end_time}</p>
+                    <p>{moment(dealCard.start_time, "YYYYMMDD").fromNow()}</p>
+                    <p>{moment(dealCard.start_time).format('MMM Do YYYY, h:mm:ss a')}</p>
+                    <p>{moment(dealCard.end_time).format('MMM Do YYYY, h:mm:ss a')}</p>
                     <p>{dealCard.location}</p>
                 </div>
             )
