@@ -102,7 +102,7 @@ class AddDeal extends Component {
                     />
                     </div>
                     <TextField 
-                        label="Upload Your Deal Image!"
+                        // label="Upload Your Deal Image!"
                         type="file"
                         onChange={this.fileSelectedHandler}
                     />

@@ -5,7 +5,7 @@ import moment from 'moment';
 
 class AdminDealsPage extends Component {
     state = {
-        heading: 'Your Deals!',
+        heading: 'Your Deals',
     };
 
     componentDidMount() {
