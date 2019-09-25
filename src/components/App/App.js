@@ -21,15 +21,23 @@ import LoginPage from '../LoginPage/LoginPage';
 import RegisterBusinessPage from '../RegisterBusinessPage/RegisterBusinessPage';
 import AdminDealsPage from '../AdminDealsPage/AdminDealsPage';
 import AddDealPage from '../AddDealPage/AddDealPage';
+import GetPatronLocation from '../GetPatronLocation/GetPatronLocation';
+import getLocation from '../../services/GetLocation/GetLocation';
 
 import './App.css';
 
-class App extends Component {
 
+class App extends Component {
+  componentDidMount() {
+    // attempts to get user location upon initial app load
+    getLocation();
+  }
   render() {
-    
+     
     return (
+      
       <Router>
+        {/* <GetPatronLocation /> */}
         <div>
           <Nav />
           <Switch>
