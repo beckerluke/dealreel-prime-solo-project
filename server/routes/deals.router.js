@@ -9,7 +9,7 @@ const moment = require('moment');
 router.get('/', (req, res) => {
     let queryText = `SELECT * FROM "deals" 
                     JOIN "user" ON "user".id = "deals"."user_id"
-                    WHERE "start_time" > $1 AND "end_time" < $2
+                    WHERE "end_time" >= $1 AND "end_time" <= $2
                     ORDER BY "user"."id", "end_time" DESC;`;
 
     const currentDateTime = moment().format();
