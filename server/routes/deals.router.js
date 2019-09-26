@@ -64,7 +64,7 @@ router.get('/admin', (req, res) => {
 }); // end GET for specific business fetching their deals
 
 /**
- * POST route template
+ * POST route so businesses can add a deal that broadcasts on main page
  */
 router.post('/admin/add/deal', (req, res) => {
     const newDeal = req.body;
@@ -96,6 +96,6 @@ router.post('/admin/add/deal', (req, res) => {
     } else {
         res.sendStatus(500);
     } // end authentication check
-});
+}); // end POST to allow business to add a deal
 
 module.exports = router;

@@ -22,17 +22,19 @@ class LandingPage extends Component {
     render() {
 
         const allDeals = this.props.store.deals.map((dealCard, index) => {
+            // if (dealCard.end_time.isAfter(moment().format())) {
             return (
                 // this will be the deal cards and eventually be made their own component
                 <div className="dealCard" key={index}>
                     <h2>{dealCard.business_name}</h2>
                     <h3>{dealCard.description}</h3>
                     <p>{moment(dealCard.start_time).calendar()}</p>
-                    <p>{moment(dealCard.start_time).endOf('day').fromNow()}</p>
+                    <p>{moment(dealCard.start_time).fromNow()}</p>
                     <p>{moment(dealCard.start_time).format('LTS')} TO {moment(dealCard.end_time).format('LTS')}</p>
                     <p>{dealCard.location}</p>
                 </div>
             )
+            // }
         });
         
         return (

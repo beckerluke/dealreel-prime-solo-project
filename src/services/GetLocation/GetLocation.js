@@ -1,7 +1,10 @@
 const getLocation = () => {
-
     function onPositionReceived(position) {
-        console.log(position);
+        console.log(position.coords);
+        const lng = position.coords.longitude;
+        const lat = position.coords.latitude;
+        console.log(`longitude: ${lng} | latitude: ${lat}`);
+        
     }
 
     function locationNotReceived(positionError) {
@@ -16,4 +19,5 @@ const getLocation = () => {
         navigator.geolocation.clearWatch(watch);
     }
 }
+
 export default getLocation;

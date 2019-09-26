@@ -28,11 +28,33 @@ import './App.css';
 
 
 class App extends Component {
+
+  state = {
+    currentLocation: {
+      lat: null,
+      lng: null,
+    }
+  }
+
+
   componentDidMount() {
     // attempts to get user location upon initial app load
     getLocation();
+    // if (navigator && navigator.geolocation) {
+    //   navigator.geolocation.getCurrentPosition((pos) => {
+    //       const coords = pos.coords;
+    //       this.setState({
+    //           currentLocation: {
+    //               lat: coords.latitude,
+    //               lng: coords.longitude
+    //           }
+    //       });
+    //   });
+    // } 
   }
+  
   render() {
+    console.log(this.props);
      
     return (
       

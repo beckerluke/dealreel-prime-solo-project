@@ -6,6 +6,28 @@ import { exportDefaultSpecifier } from '@babel/types';
 
 class GetPatronLocation extends Component {
 
+    // state = {
+    //     currentLocation: {
+    //         lat: null,
+    //         lng: null,
+    //     }
+    // }
+
+    // componentDidMount() {
+
+    //     if (navigator && navigator.geolocation) {
+    //         navigator.geolocation.getCurrentPosition((pos) => {
+    //             const coords = pos.coords;
+    //             this.setState({
+    //                 currentLocation: {
+    //                     lat: coords.latitude,
+    //                     lng: coords.longitude
+    //                 }
+    //             });
+    //         });
+    //     }
+    // } 
+
     render() {
         console.log(this.props);
 
