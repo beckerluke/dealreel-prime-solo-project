@@ -3,13 +3,27 @@ const pool = require('../modules/pool');
 const router = express.Router();
 const moment = require('moment');
 
+// used to get nearby locations of user from Google Places API search
+const GoogleLocations = require('google-locations');
+const locations = new GoogleLocations(process.env.GOOGLE_API);
+
+
 /**
  * GET all deals from database
  */
 router.get('/', (req, res) => {
+
+    // locations.search({
+    //     radius: 50000, 
+    //     keyword: 'Harpos Bar and Grill',
+    //     location: [39.0985854, -94.5783239]
+    // }, function(err,response) {
+    //     console.log("search: ", response.results)
+    // });
+
     let queryText = `SELECT * FROM "deals" 
                     JOIN "user" ON "user".id = "deals"."user_id"
-                    WHERE "start_time" > $1 AND "end_time" < $2
+                    WHERE "end_time" >= $1 AND "end_time" <= $2
                     ORDER BY "user"."id", "end_time" DESC;`;
 
     const currentDateTime = moment().format();
@@ -17,6 +31,7 @@ router.get('/', (req, res) => {
 
     pool.query(queryText,[currentDateTime, cutOffDate]).then(result => {
       // Sends back the results in an object
+      console.log('DB LOG: ', result.rows);
       res.send(result.rows);
     })
     .catch(error => {

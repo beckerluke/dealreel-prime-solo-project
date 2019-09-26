@@ -4,7 +4,10 @@ const getLocation = () => {
         const lng = position.coords.longitude;
         const lat = position.coords.latitude;
         console.log(`longitude: ${lng} | latitude: ${lat}`);
-        
+        return {
+            lng,
+            lat
+        }
     }
 
     function locationNotReceived(positionError) {

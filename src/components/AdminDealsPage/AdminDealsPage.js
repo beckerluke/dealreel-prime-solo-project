@@ -24,7 +24,7 @@ class AdminDealsPage extends Component {
                 <div className="dealCard" key={index}>
                     <h2>{dealCard.business_name}</h2>
                     <h3>{dealCard.description}</h3>
-                    <p>{moment(dealCard.start_time, "YYYYMMDD").fromNow()}</p>
+                    <p>{moment(dealCard.end_time).fromNow()}</p>
                     <p>{moment(dealCard.start_time).format('MMM Do YYYY, h:mm:ss a')}</p>
                     <p>{moment(dealCard.end_time).format('MMM Do YYYY, h:mm:ss a')}</p>
                     <p>{dealCard.location}</p>

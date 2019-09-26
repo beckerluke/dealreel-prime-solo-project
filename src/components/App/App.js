@@ -39,7 +39,10 @@ class App extends Component {
 
   componentDidMount() {
     // attempts to get user location upon initial app load
-    getLocation();
+    // getLocation();
+    
+    this.saveLocation();
+
     // if (navigator && navigator.geolocation) {
     //   navigator.geolocation.getCurrentPosition((pos) => {
     //       const coords = pos.coords;
@@ -51,6 +54,10 @@ class App extends Component {
     //       });
     //   });
     // } 
+  }
+
+  saveLocation() {
+    const locObject = getLocation();
   }
   
   render() {
