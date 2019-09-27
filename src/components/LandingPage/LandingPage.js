@@ -28,7 +28,7 @@ class LandingPage extends Component {
                 <div className="dealCard" key={index}>
                     <h2>{dealCard.business_name}</h2>
                     <h3>{dealCard.description}</h3>
-                    <p>{moment(dealCard.start_time).calendar()}</p>
+                    <p>Started {moment(dealCard.start_time).calendar()}</p>
                     <p>ends {moment(dealCard.end_time).fromNow()}</p>
                     <p>{moment(dealCard.start_time).format('LTS')} TO {moment(dealCard.end_time).format('LTS')}</p>
                     <p>{dealCard.location}</p>

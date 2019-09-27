@@ -23,15 +23,34 @@ router.get('/', (req, res) => {
 
     let queryText = `SELECT * FROM "deals" 
                     JOIN "user" ON "user".id = "deals"."user_id"
-                    WHERE "end_time" >= $1 AND "end_time" <= $2
+                    WHERE "start_time" <= $1 
+                    AND "end_time" >= $1
+                    AND "end_time" <= $2
                     ORDER BY "user"."id", "end_time" DESC;`;
 
     const currentDateTime = moment().format();
     const cutOffDate = moment().add(8, 'hours');
 
+    // Retrieve all deals from DB where end time is greater than the 
+    // current date time and less than current date time plus 8 hours
     pool.query(queryText,[currentDateTime, cutOffDate]).then(result => {
-      // Sends back the results in an object
+      // Sends back business and deals results in an object
       console.log('DB LOG: ', result.rows);
+      // returns all businesses with deals going on now and stores in array
+      const businessesArray = result.rows.map((dealItem, index) => {
+          return (
+            dealItem.business_name
+          );
+      });
+      console.log('BUSINESSES ARRAY ', businessesArray);
+      // locations.search({
+    //     radius: 50000, 
+    //     keyword: 'Harpos Bar and Grill',
+    //     location: [39.0985854, -94.5783239]
+    // }, function(err,response) {
+    //     console.log("search: ", response.results)
+    // });
+
       res.send(result.rows);
     })
     .catch(error => {
