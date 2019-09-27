@@ -15,19 +15,21 @@ class AdminDealsPage extends Component {
     
     render() {
         const allAdminDeals = this.props.store.deals;
+
         if (allAdminDeals.length === 0) {
             return (<h2>You haven't set any deals</h2>)
         } 
+        
+        // shows all previous and future deals business has set
         const allAdminDealsList = allAdminDeals.map((dealCard, index) => {
             return (
                 // this will be the deal cards and eventually be made their own component
                 <div className="dealCard" key={index}>
-                    <h2>{dealCard.business_name}</h2>
-                    <h3>{dealCard.description}</h3>
-                    <p>{moment(dealCard.start_time, "YYYYMMDD").fromNow()}</p>
+                    <h2>{dealCard.description}</h2>
+                    <p>{moment(dealCard.end_time).fromNow()}</p>
                     <p>{moment(dealCard.start_time).format('MMM Do YYYY, h:mm:ss a')}</p>
                     <p>{moment(dealCard.end_time).format('MMM Do YYYY, h:mm:ss a')}</p>
-                    <p>{dealCard.location}</p>
+                    <p>Redemptions Limit: {dealCard.redemptions_limit}</p>
                 </div>
             )
         }) 

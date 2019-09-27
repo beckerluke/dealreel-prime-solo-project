@@ -21,20 +21,30 @@ class LandingPage extends Component {
 
     render() {
         
+        // in case business has never set a deal before
         if (this.props.store.deals.length === 0) {
             return (<h2>No Deals Happening Near You At This Time</h2>)
         }
 
+        // Maps over array of objects consisting of all active deals
         const allDeals = this.props.store.deals.map((dealCard, index) => {
+            
+            // If business set redemptions limit to 0 show that Redemptions
+            // available is unlimited on deal card
+            if (dealCard.redemptions_limit === 0) {
+                dealCard.redemptions_limit = 'Unlimited';
+            }
+
             return (
                 // this will be the deal cards and eventually be made their own component
                 <div className="dealCard" key={index}>
-                    <h2>{dealCard.business_name}</h2>
-                    <h3>{dealCard.description}</h3>
+                    <h2>{dealCard.description}</h2>
+                    <h3>{dealCard.business_name}</h3>
+                    <h4>{dealCard.address}</h4>
                     <p>Started {moment(dealCard.start_time).calendar()}</p>
                     <p>ends {moment(dealCard.end_time).fromNow()}</p>
                     <p>{moment(dealCard.start_time).format('LTS')} TO {moment(dealCard.end_time).format('LTS')}</p>
-                    <p>{dealCard.location}</p>
+                    <p>Redemptions Remaining: {dealCard.redemptions_limit}</p>
                 </div>
             )
         });
