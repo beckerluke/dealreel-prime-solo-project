@@ -1,5 +1,6 @@
 import { put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
+import geoLocation from '../../services/GetLocation/GetLocation';
 
 // will fire off on FETCH_ALL_DEALS
 function* fetchAllDeals() {
@@ -9,8 +10,18 @@ function* fetchAllDeals() {
         withCredentials: true,
       };
     // GET request to get all the deals from the database
-    const response = yield axios.get('api/deals', config);
+    console.log('geoLocation:', geoLocation);
 
+    // will wait until geoLocation resolves
+    // userGeoLoc is equal to object holding lat and long 
+    const userGeoLoc = yield geoLocation();
+    console.log('userGeoLoc: ', userGeoLoc);
+    const response = yield axios.get(`api/deals/?lat=${userGeoLoc.lat}&lng=${userGeoLoc.lng}`, config);
+
+      // Response from server of all active deals with distance data
+      console.log('deal fetch: ', response.data);
+
+    // dispatch to store in deals reducer
     yield put({type: 'SET_ALL_DEALS', payload: response.data});
   } catch (error) {
       console.log('Error with getting all deals:', error);

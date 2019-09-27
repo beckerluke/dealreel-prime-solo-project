@@ -21,52 +21,17 @@ import LoginPage from '../LoginPage/LoginPage';
 import RegisterBusinessPage from '../RegisterBusinessPage/RegisterBusinessPage';
 import AdminDealsPage from '../AdminDealsPage/AdminDealsPage';
 import AddDealPage from '../AddDealPage/AddDealPage';
-import GetPatronLocation from '../GetPatronLocation/GetPatronLocation';
-import getLocation from '../../services/GetLocation/GetLocation';
 
 import './App.css';
 
 
 class App extends Component {
 
-  state = {
-    currentLocation: {
-      lat: null,
-      lng: null,
-    }
-  }
-
-
-  componentDidMount() {
-    // attempts to get user location upon initial app load
-    // getLocation();
-    
-    this.saveLocation();
-
-    // if (navigator && navigator.geolocation) {
-    //   navigator.geolocation.getCurrentPosition((pos) => {
-    //       const coords = pos.coords;
-    //       this.setState({
-    //           currentLocation: {
-    //               lat: coords.latitude,
-    //               lng: coords.longitude
-    //           }
-    //       });
-    //   });
-    // } 
-  }
-
-  saveLocation() {
-    const locObject = getLocation();
-  }
-  
   render() {
-    console.log(this.props);
      
     return (
       
       <Router>
-        {/* <GetPatronLocation /> */}
         <div>
           <Nav />
           <Switch>

@@ -6,6 +6,9 @@ import moment from 'moment';
 
 import './LandingPage.css';
 
+// Proximity That User Will View Deals From
+const FARTHEST_DIST = 50000;
+
 class LandingPage extends Component {
     state = {
         heading: 'DEALS NEAR YOU',
@@ -25,10 +28,14 @@ class LandingPage extends Component {
             return (<h2>No Deals Happening Near You At This Time</h2>)
         }
 
-        const allDeals = this.props.store.deals.map((dealCard, index) => {
-            // if (dealCard.end_time.isAfter(moment().format())) {
+        // filters all active deals by distance away from user
+        const closestDeals = this.props.store.deals.filter((deal) => {
+
+        });
+        const allDeals = closestDeals.map((dealCard, index) => {
+        
             return (
-                // this will be the deal cards and eventually be made their own component
+                // this is the deal card displayed in deals feed
                 <div className="dealCard" key={index}>
                     <h2>{dealCard.business_name}</h2>
                     <h3>{dealCard.description}</h3>
@@ -38,7 +45,7 @@ class LandingPage extends Component {
                     <p>{dealCard.location}</p>
                 </div>
             )
-            // }
+
         });
         
         return (

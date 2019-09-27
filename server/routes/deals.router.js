@@ -2,24 +2,13 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 const moment = require('moment');
-
-// used to get nearby locations of user from Google Places API search
-const GoogleLocations = require('google-locations');
-const locations = new GoogleLocations(process.env.GOOGLE_API);
-
+const axios = require('axios');
 
 /**
- * GET all deals from database
+ * GET all active deals from database
  */
 router.get('/', (req, res) => {
-
-    // locations.search({
-    //     radius: 50000, 
-    //     keyword: 'Harpos Bar and Grill',
-    //     location: [39.0985854, -94.5783239]
-    // }, function(err,response) {
-    //     console.log("search: ", response.results)
-    // });
+    console.log('Lat and long: ', req.query);
 
     let queryText = `SELECT * FROM "deals" 
                     JOIN "user" ON "user".id = "deals"."user_id"
@@ -36,28 +25,60 @@ router.get('/', (req, res) => {
     pool.query(queryText,[currentDateTime, cutOffDate]).then(result => {
       // Sends back business and deals results in an object
       console.log('DB LOG: ', result.rows);
-      // returns all businesses with deals going on now and stores in array
-      const businessesArray = result.rows.map((dealItem, index) => {
-          return (
-            dealItem.business_name
-          );
-      });
-      console.log('BUSINESSES ARRAY ', businessesArray);
-      // locations.search({
-    //     radius: 50000, 
-    //     keyword: 'Harpos Bar and Grill',
-    //     location: [39.0985854, -94.5783239]
-    // }, function(err,response) {
-    //     console.log("search: ", response.results)
-    // });
+      
+      // all active deals retrieved from database
+      const activeDeals = result.rows;
 
-      res.send(result.rows);
+      // user coordinates passed
+      const userLatitude = req.query.lat;
+      const userLongitude = req.query.lng;
+
+      // string to send to GOOGLE DISTANCE MATRIX API
+      let googleQuery = `https://maps.googleapis.com/maps/api/distancematrix/json?origins=${userLatitude},${userLongitude}&key=${process.env.GOOGLE_API}&destinations=`
+      
+      // loop through all active deals and add each one's address as 
+      // destinations for Google API query
+      activeDeals.forEach((deal, index) => {
+        googleQuery += deal.address;
+        if (index !== (activeDeals.length - 1)) {
+            googleQuery += `|`
+        }
+      });
+
+      // send axios request to GOOGLE DISTANCE MATRIX API
+      axios.get(googleQuery).then((response) => {
+
+        // Response from Google 
+        console.log(response.data.rows[0]);
+        // the user's origin location
+        const originLocation = response.data.rows[0];
+        
+        // all of the active deals locations
+        const destinations = originLocation.elements;
+
+        // mapping over all active deals and adding distance data from 
+        // Google Distance Matrix to each dealItem to capture deal's 
+        // distance from user
+        const dealsWithDistance = activeDeals.map((deal, index) => {
+            const distance = destinations[index].distance;
+            return {
+                ...deal,
+                distance,
+            };
+        })
+
+        // send back new array holding distance data from Google to 
+        // deals saga
+        res.send(dealsWithDistance);
+      }).catch(error => {
+          console.log('ERR0R getting from Google: ', error )
+      });
     })
     .catch(error => {
       console.log('error getting deals', error);
       res.sendStatus(500);
     });
-  });
+  }); // end of GET to retrieve all active deals within user's location
 
 /**
  * GET deals for each individual business
