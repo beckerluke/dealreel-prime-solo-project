@@ -14,11 +14,13 @@ class AdminDealsPage extends Component {
 
     
     render() {
+        console.log(this.props.store.deals);
         let allAdminDeals = this.props.store.deals;
         if (allAdminDeals.length === 0) {
-            return (<h2>You don't have any deals</h2>)
+            return (<h2>You haven't set any deals</h2>)
         } 
-        allAdminDeals = this.props.store.deals.map((dealCard, index) => {
+
+        const allAdminDealsList = allAdminDeals.map((dealCard, index) => {
             return (
                 // this will be the deal cards and eventually be made their own component
                 <div className="dealCard" key={index}>
@@ -39,7 +41,7 @@ class AdminDealsPage extends Component {
 
                 <div className="grid">
                     <div className="grid-col grid-col_8">
-                        {allAdminDeals}
+                        {allAdminDealsList}
                     </div>
                 </div>
             </div>

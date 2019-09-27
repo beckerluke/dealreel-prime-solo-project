@@ -127,7 +127,7 @@ class RegisterBusinessPage extends Component {
             />
           </div>
         </form>
-        <center>
+        {/* <center> */}
           <button
             type="button"
             className="link-button"
@@ -135,7 +135,7 @@ class RegisterBusinessPage extends Component {
           >
             Login
           </button>
-        </center>
+        {/* </center> */}
       </div>
     );
   }

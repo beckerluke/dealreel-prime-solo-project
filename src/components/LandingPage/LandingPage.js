@@ -20,6 +20,10 @@ class LandingPage extends Component {
     }
 
     render() {
+        console.log(this.props.store.deals);
+        if (this.props.store.deals.length === 0) {
+            return (<h2>No Deals Happening Near You At This Time</h2>)
+        }
 
         const allDeals = this.props.store.deals.map((dealCard, index) => {
             // if (dealCard.end_time.isAfter(moment().format())) {
