@@ -11,7 +11,6 @@ class AddDeal extends Component {
         endTime: '',
         description: '',
         redemptionsLimit: 0,
-        imageFileSelected: null
     };
 
     // -----Handles all input data for deal except image data-------
@@ -32,6 +31,15 @@ class AddDeal extends Component {
             return (Swal.fire(
                 'Error',
                 'Invalid time selected',
+                'error'
+            ))
+        }
+
+        // checks to make sure user enters a description
+        if (this.state.description === '') {
+            return (Swal.fire(
+                'Error',
+                'Enter a description',
                 'error'
             ))
         }
@@ -87,7 +95,7 @@ class AddDeal extends Component {
                         }}
                     />
                     <TextField 
-                        placeholder="Deal Description"
+                        placeholder="Brief description of deal"
                         label="Deal Description"
                         onChange={this.handleInputChangeFor('description')}
                     />

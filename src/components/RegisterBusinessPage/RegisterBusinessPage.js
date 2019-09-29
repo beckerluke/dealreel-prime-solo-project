@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
+import Swal from 'sweetalert2';
 
 class RegisterBusinessPage extends Component {
   state = {
@@ -14,6 +15,21 @@ class RegisterBusinessPage extends Component {
 
   registerUser = (event) => {
     event.preventDefault();
+    
+    if (this.state.username === '' || this.state.password === '' || this.state.businessName === ''
+      || this.state.email === '' || this.state.phoneNumber === '' || this.state.address === '') {
+        return (Swal.fire(
+          'Error',
+          'You Must Enter All Fields',
+          'error'
+        ))  
+    }
+
+    Swal.fire(
+      'Success!',
+      'Your can now add your deals!',
+      'success'
+    )
 
     if (this.state.username && this.state.password) {
       this.props.dispatch({
