@@ -8,7 +8,6 @@ const axios = require('axios');
  * GET all active deals from database
  */
 router.get('/', (req, res) => {
-    console.log('Lat and long: ', req.query);
 
     let queryText = `SELECT * FROM "deals" 
                     JOIN "user" ON "user".id = "deals"."user_id"
@@ -24,7 +23,6 @@ router.get('/', (req, res) => {
     // current date time and less than current date time plus 8 hours
     pool.query(queryText,[currentDateTime, cutOffDate]).then(result => {
       // Sends back business and deals results in an object
-      console.log('DB LOG: ', result.rows);
       
       // all active deals retrieved from database
       const activeDeals = result.rows;
@@ -47,10 +45,8 @@ router.get('/', (req, res) => {
 
       // send axios request to GOOGLE DISTANCE MATRIX API
       axios.get(googleQuery).then((response) => {
-
-        // Response from Google 
-        console.log(response.data.rows[0]);
-        // the user's origin location
+        
+        // Response from Google: the user's origin location
         const originLocation = response.data.rows[0];
         
         // all of the active deals locations
@@ -83,13 +79,10 @@ router.get('/', (req, res) => {
 /**
  * GET deals for each individual business
  */
-router.get('/admin', (req, res) => {
-    console.log('/api/deals/admin');    
+router.get('/admin', (req, res) => {  
     // to ensure business is authenticated before fetching their 
     // specific deals list
-    if (req.isAuthenticated()) {
-        console.log('SEC LEVEL: ', req.user.sec_level);
-       
+    if (req.isAuthenticated()) {   
         // check to ensure user has authorization
         if (req.user.sec_level > 1 ) {
 
@@ -99,11 +92,9 @@ router.get('/admin', (req, res) => {
                             ORDER BY "user"."id", "end_time" DESC;`;
             
             const dealID = req.user.id; 
-            console.log('USER ID:', req.user.id);
 
             pool.query(queryText, [dealID]).then(result => {
                 // Sends back the results in an object
-                console.log('SUCCESS!!!!: ', result.rows)
                 res.send(result.rows);
             })
             .catch(error => {

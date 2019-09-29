@@ -14,7 +14,8 @@ class AdminDealsPage extends Component {
 
     
     render() {
-        console.log(this.props.store.adminDeals);
+
+        // list of all deals a business has ever set
         let allAdminDeals = this.props.store.adminDeals;
         if (allAdminDeals.length === 0) {
             return (<h2>You haven't set any deals</h2>)

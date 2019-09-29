@@ -23,7 +23,6 @@ class LandingPage extends Component {
     }
 
     render() {
-        console.log(this.props.store.deals);
         if (this.props.store.deals.length === 0) {
             return (
                 <div>
@@ -34,7 +33,7 @@ class LandingPage extends Component {
                         color="primary"
                         onClick={this.onLogin}
                     >
-                        Your Deals
+                        Go To Your Deals
                     </Button>
                 </div>
             )
@@ -45,6 +44,7 @@ class LandingPage extends Component {
             return deal.distance.value <= FARTHEST_DIST
         });
 
+        // maps through the array of filtered deal objects
         const allDeals = closestDeals.map((dealCard, index) => {
 
             // converts distance from meters to miles
@@ -79,7 +79,7 @@ class LandingPage extends Component {
                             color="primary"
                             onClick={this.onLogin}
                         >
-                            Your Deals
+                            Go To Your Deals
                         </Button>
                     </div>
                 </div>

@@ -7,10 +7,8 @@ const getLocation = () => {
     
 
         function onPositionReceived(position) {
-            console.log(position.coords);
             const lng = position.coords.longitude;
             const lat = position.coords.latitude;
-            console.log(`longitude: ${lng} | latitude: ${lat}`);
             resolve({
                 lng,
                 lat
@@ -23,7 +21,6 @@ const getLocation = () => {
             
         }
 
-        console.log('nav geo', navigator.geolocation);
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(onPositionReceived, locationNotReceived);
 

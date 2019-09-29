@@ -9,19 +9,17 @@ function* fetchAllDeals() {
         headers: { 'Content-Type': 'application/json' },
         withCredentials: true,
       };
-    // GET request to get all the deals from the database
-    console.log('geoLocation:', geoLocation);
+    
 
-    // waits until geoLocation resolves getting user coordinates before 
-    // initiating GET req to server 
     // userGeoLoc is equal to resolve object holding lat and long 
     const userGeoLoc = yield geoLocation();
-    console.log('userGeoLoc: ', userGeoLoc);
+
+    // GET request to get all the deals from the database
+    // waits until geoLocation resolves getting user coordinates before 
+    // initiating GET req to server 
     const response = yield axios.get(`api/deals/?lat=${userGeoLoc.lat}&lng=${userGeoLoc.lng}`, config);
 
-      // Response from server of all active deals with distance data
-      console.log('deal fetch: ', response.data);
-
+    // Response from server of all active deals with distance data
     // dispatch to store in deals reducer
     yield put({type: 'SET_ALL_DEALS', payload: response.data});
   } catch (error) {
