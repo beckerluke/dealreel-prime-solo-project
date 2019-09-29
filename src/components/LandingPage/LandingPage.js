@@ -6,8 +6,8 @@ import moment from 'moment';
 
 import './LandingPage.css';
 
-// Proximity That User Will View Deals From
-const FARTHEST_DIST = 50000;
+// Max Proximity That User Will Be Able to View Deals From
+const FARTHEST_DIST = 35200;
 
 class LandingPage extends Component {
     state = {
@@ -25,13 +25,26 @@ class LandingPage extends Component {
     render() {
         console.log(this.props.store.deals);
         if (this.props.store.deals.length === 0) {
-            return (<h2>No Deals Happening Near You At This Time</h2>)
+            return (
+                <div>
+                    <h2>No Deals Happening Near You At This Time</h2>
+                    <h3>Already a Member?</h3>
+                    <Button
+                        variant="outlined"
+                        color="primary"
+                        onClick={this.onLogin}
+                    >
+                        Login
+                    </Button>
+                </div>
+            )
         }
 
         // filters all active deals by distance away from user
-        const closestDeals = this.props.store.deals.filter((deal) => {
-
+        const closestDeals = this.props.store.deals.filter((deal, index) => {
+            return deal.distance.value <= FARTHEST_DIST
         });
+
         const allDeals = closestDeals.map((dealCard, index) => {
         
             return (

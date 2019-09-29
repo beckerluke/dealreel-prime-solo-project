@@ -1,4 +1,7 @@
 const getLocation = () => {
+
+    // deferred Promise to get user coordinates and returns them in 
+    // object when resolved
     return new Promise((resolve, reject) => {
 
     

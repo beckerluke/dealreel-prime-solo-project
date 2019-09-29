@@ -12,8 +12,9 @@ function* fetchAllDeals() {
     // GET request to get all the deals from the database
     console.log('geoLocation:', geoLocation);
 
-    // will wait until geoLocation resolves
-    // userGeoLoc is equal to object holding lat and long 
+    // waits until geoLocation resolves getting user coordinates before 
+    // initiating GET req to server 
+    // userGeoLoc is equal to resolve object holding lat and long 
     const userGeoLoc = yield geoLocation();
     console.log('userGeoLoc: ', userGeoLoc);
     const response = yield axios.get(`api/deals/?lat=${userGeoLoc.lat}&lng=${userGeoLoc.lng}`, config);
