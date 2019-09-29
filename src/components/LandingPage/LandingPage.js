@@ -6,7 +6,7 @@ import moment from 'moment';
 
 import './LandingPage.css';
 
-// Max Proximity That User Will Be Able to View Deals From
+// Max Proximity That User Will Be Able to View Deals From (in meters)
 const FARTHEST_DIST = 35200;
 
 class LandingPage extends Component {
@@ -34,7 +34,7 @@ class LandingPage extends Component {
                         color="primary"
                         onClick={this.onLogin}
                     >
-                        Login
+                        Your Deals
                     </Button>
                 </div>
             )
@@ -70,13 +70,13 @@ class LandingPage extends Component {
                         {allDeals}
                     </div>
                     <div className="grid-col grid-col_4">
-                        <h3>Already a Member?</h3>
+                        <h3>Already a User?</h3>
                         <Button
                             variant="outlined"
                             color="primary"
                             onClick={this.onLogin}
                         >
-                            Login
+                            Your Deals
                         </Button>
                     </div>
                 </div>

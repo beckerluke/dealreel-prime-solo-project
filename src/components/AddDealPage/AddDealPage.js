@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import {TextField} from '@material-ui/core';
 import moment from 'moment';
+import Swal from 'sweetalert2';
 
 class AddDeal extends Component {
     state = {
@@ -24,15 +25,22 @@ class AddDeal extends Component {
     submitDeal = event => {
         event.preventDefault();
 
-        // checks to make sure user enters start time after current date time
-        if ( moment().isAfter(this.state.startTime) ) {
-            return alert('Invalid start time entered')
+        // checks to make sure user enters correct start times and end times
+        if (moment().isAfter(this.state.startTime) || 
+            moment(this.state.endTime).isBefore(moment()) || 
+            moment(this.state.startTime).isAfter(this.state.endTime)) {
+            return (Swal.fire(
+                'Error',
+                'Invalid time selected',
+                'error'
+            ))
         }
 
-        // checks to make sure user enters end time after the start time
-        if (moment(this.state.startTime).isAfter(this.state.endTime)) {
-            return alert('Invalid selection for start and end times');
-        }
+        Swal.fire(
+            'Deal Set!',
+            'Your deal will be activated and broadcasted at set time!',
+            'success'
+        )
 
         this.props.dispatch({type: 'ADD_DEAL', 
             payload: {
@@ -43,15 +51,8 @@ class AddDeal extends Component {
                 imageFileSelected: this.state.imageFileSelected
             }
         });
-    } // end submitDeal
 
-    // ----Handles image upload data----------------
-    fileUploadHandler = event => {
-        this.setState({
-            imageFileSelected: event.target.files[0]
-        });
-    }
-    
+    } // end submitDeal    
 
     render() {
 
@@ -101,11 +102,6 @@ class AddDeal extends Component {
                         margin="normal"
                     />
                     </div>
-                    <TextField 
-                        // label="Upload Your Deal Image!"
-                        type="file"
-                        onChange={this.fileSelectedHandler}
-                    />
                     <div>
                     <input
                         type="submit"
