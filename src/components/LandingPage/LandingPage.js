@@ -46,6 +46,9 @@ class LandingPage extends Component {
         });
 
         const allDeals = closestDeals.map((dealCard, index) => {
+
+            // converts distance from meters to miles
+            const dealDistance = Math.round(dealCard.distance.value/1609.344);
         
             return (
                 // this is the deal card displayed in deals feed
@@ -55,7 +58,7 @@ class LandingPage extends Component {
                     <p>Started {moment(dealCard.start_time).calendar()}</p>
                     <p>ends {moment(dealCard.end_time).fromNow()}</p>
                     <p>{moment(dealCard.start_time).format('LTS')} TO {moment(dealCard.end_time).format('LTS')}</p>
-                    <p>{dealCard.location}</p>
+                    <p>{dealDistance} miles away</p>
                 </div>
             )
 
