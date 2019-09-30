@@ -5,7 +5,7 @@ import {
 } from 'react-router-dom'
 import {connect} from 'react-redux';
 import LoginPage from '../LoginPage/LoginPage';
-import RegisterBusinessPage from '../RegisterBusinessPage/RegisterBusinessPage';
+import RegisterBusinessPage from '../../components/RegisterBusinessPage/RegisterBusinessPage';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
 // A Custom Wrapper Component -- This will keep our code DRY.
