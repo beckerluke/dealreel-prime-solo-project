@@ -1,6 +1,8 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0px;
+    background-color: whitesmoke;
+    color: rgb(106, 29, 230);
 }
 
 .alert {
@@ -9,9 +11,10 @@ body {
 }
 
 form {
-    background-color: #dbd5d5;
+    background-color: #30e639;
+    color: rgb(106, 29, 230);
     width: 30%;
-    height: 250px;
+    height: 400px;
     margin: 20px auto;
     padding: 25px;
     border-radius: 2px;
@@ -23,7 +26,7 @@ input {
 }
 
 .log-in, .log-out, .register {
-  background-color: #30e639;
+  background-color: rgb(106, 29, 230);
   border-radius: 4px;
   color: #f8f8f8;
   min-height: 50px;
@@ -46,4 +49,13 @@ input {
     outline:0;
     border-bottom:1px solid #444; 
     cursor: pointer;
+}
+
+.secondary-header {
+    text-align: center;
+}
+
+h2 {
+    text-shadow: 1px 0 #000;
+    font-style: italic;
 }

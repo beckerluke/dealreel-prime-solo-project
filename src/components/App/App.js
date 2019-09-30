@@ -24,11 +24,13 @@ import AddDealPage from '../AddDealPage/AddDealPage';
 
 import './App.css';
 
+
 class App extends Component {
 
   render() {
-    
+     
     return (
+      
       <Router>
         <div>
           <Nav />

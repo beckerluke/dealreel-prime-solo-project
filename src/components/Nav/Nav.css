@@ -4,7 +4,8 @@
     display: inline-block;
     color: #30e639;
     padding-left: 10px;
-    text-shadow: 4px 0 #000
+    text-shadow: 4px 0 #000;
+    font-style: italic;
 }
 
 .nav {

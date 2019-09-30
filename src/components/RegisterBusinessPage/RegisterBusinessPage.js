@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
+import Swal from 'sweetalert2';
+import { TextField } from '@material-ui/core';
 
 class RegisterBusinessPage extends Component {
   state = {
@@ -14,6 +16,21 @@ class RegisterBusinessPage extends Component {
 
   registerUser = (event) => {
     event.preventDefault();
+    
+    if (this.state.username === '' || this.state.password === '' || this.state.businessName === ''
+      || this.state.email === '' || this.state.phoneNumber === '' || this.state.address === '') {
+        return (Swal.fire(
+          'Error',
+          'You Must Enter All Fields',
+          'error'
+        ))  
+    }
+
+    Swal.fire(
+      'Success!',
+      'Your can now add your deals!',
+      'success'
+    )
 
     if (this.state.username && this.state.password) {
       this.props.dispatch({
@@ -52,71 +69,60 @@ class RegisterBusinessPage extends Component {
         <form onSubmit={this.registerUser}>
           <h1>Register Business</h1>
           <div>
-            <label htmlFor="username">
-              Username:
-              <input
+              <TextField
+                label="Username"
                 type="text"
                 name="username"
                 value={this.state.username}
                 onChange={this.handleInputChangeFor('username')}
               />
-            </label>
           </div>
           <div>
-            <label htmlFor="password">
-              Password:
-              <input
+              <TextField
+                label="Password"
                 type="password"
                 name="password"
                 value={this.state.password}
                 onChange={this.handleInputChangeFor('password')}
               />
-            </label>
           </div>
           <div>
-            <label htmlFor="businessName">
-              Official Name of Establishment:
-              <input
+              <TextField
+                label="Establishment Name"
+                placeholder="Official Name of Establishment"
                 type="text"
                 name="businessName"
                 value={this.state.businessName}
                 onChange={this.handleInputChangeFor('businessName')}
               />
-            </label>
           </div>
           <div>
-            <label htmlFor="email">
-              Email Address:
-              <input
+              <TextField
+                label="Email Address"
                 type="text"
                 name="email"
                 value={this.state.email}
                 onChange={this.handleInputChangeFor('email')}
               />
-            </label>
           </div>
           <div>
-            <label htmlFor="phoneNumber">
-              Business Phone Number:
-              <input
+              <TextField
+                label="Phone Number"
                 type="text"
                 name="phoneNumber"
                 value={this.state.phoneNumber}
                 onChange={this.handleInputChangeFor('phoneNumber')}
               />
-            </label>
           </div>
           <div>
-            <label htmlFor="address">
-              Business Address:
-              <input
+              <TextField
+                label="Business Address"
                 type="text"
                 name="address"
                 placeholder="enter street, city, state"
                 value={this.state.address}
                 onChange={this.handleInputChangeFor('address')}
               />
-            </label>
           </div>
           <div>
             <input
@@ -127,6 +133,7 @@ class RegisterBusinessPage extends Component {
             />
           </div>
         </form>
+        <br />
         <center>
           <button
             type="button"
