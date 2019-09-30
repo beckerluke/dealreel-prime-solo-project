@@ -43,7 +43,7 @@ const ProtectedRoute = (props) => {
   } else {
     // the the user is not logged in and the mode is not 'login'
     // show the RegisterBusinessPage
-    // ComponentToShow = RegisterBusinessPage;
+    ComponentToShow = RegisterBusinessPage;
   }
 
   // redirect a logged in user if an authRedirect prop has been provided
