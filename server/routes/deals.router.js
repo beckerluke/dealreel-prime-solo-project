@@ -120,15 +120,14 @@ router.post('/admin/add/deal', (req, res) => {
         if (req.user.sec_level > 1) {
     
             const queryText = `INSERT INTO "deals" ("start_time", "end_time", 
-                            "description", "user_id", "redemptions_limit", "image_file_selected")
-                            VALUES ($1, $2, $3, $4, $5, $6);`;
+                            "description", "user_id", "redemptions_limit")
+                            VALUES ($1, $2, $3, $4, $5);`;
             const queryValues = [
                 newDeal.startTime,
                 newDeal.endTime,
                 newDeal.description,
                 dealID,
-                parseInt(newDeal.redemptionsLimit),
-                newDeal.imageFileSelected
+                parseInt(newDeal.redemptionsLimit)
             ];
             pool.query(queryText, queryValues)
                 .then(() => { res.sendStatus(201); })
