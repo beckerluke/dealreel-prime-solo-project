@@ -10,7 +10,8 @@
 
 .nav {
   overflow: hidden;
-  background-color: rgb(106, 29, 230);
+  /* background-color: rgb(106, 29, 230); */
+  background-color: black;
 }
 
 .nav-link {
@@ -30,7 +31,7 @@
 }
 
 .nav-link:hover {
-  background-color: rgb(106, 29, 230);
+  background-color: black;
 }
 
 .nav-right {
