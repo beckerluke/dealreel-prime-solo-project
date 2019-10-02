@@ -1,115 +1,86 @@
-# Prime Project
-This version uses React, Redux, Express, Passport, and PostgreSQL (a full list of dependencies can be found in `package.json`).
+# DealReel Prime Solo Project 
 
-We **STRONGLY** recommend following these instructions carefully. It's a lot, and will take some time to set up, but your life will be much easier this way in the long run.
+## Description
+*Duration: 2 week sprint*
 
-## Download (Don't Clone) This Repository
+#####Patron Side
+DealReel is a web application platform meant to help patrons surf a live feed of posted deals from nearby establishments based on their location (using geolocation)
 
-* Don't Fork or Clone. Instead, click the `Clone or Download` button and select `Download Zip`.
-* Unzip the project and start with the code in that folder.
-* Create a new GitHub project and push this code to the new repository.
+#####Business Establishment Side
+On the other end, the DealReel is also meant to be used by business establishments to post real-time deals to this live feed, viewable to all nearby patrons within a 30 mile radius of that establishment (using Google Distance Matrix API)
 
-## Prerequisites
+The application gives an establishment the ability to broadcast live deals fast to a more targeted market of patrons within their proximity.
 
-Before you get started, make sure you have the following software installed on your computer:
+#####Overall
 
+The application is meant to enhance communication efficiency between business establishments and target patrons within their proximity when it comes to deal promotions. DealReel is a one-stop-shop platform for these patrons to surf all active deals in their area.
+
+#### Prerequisites
 - [Node.js](https://nodejs.org/en/)
 - [PostrgeSQL](https://www.postgresql.org/)
 - [Nodemon](https://nodemon.io/)
+- [Google Maps Platform API key](https://developers.google.com/maps/documentation/javascript/get-api-key)
 
-## Create database and table
-
-Create a new database called `prime_app` and create a `user` table:
-
-```SQL
-CREATE TABLE "user" (
-    "id" SERIAL PRIMARY KEY,
-    "username" VARCHAR (80) UNIQUE NOT NULL,
-    "password" VARCHAR (1000) NOT NULL
-);
-```
-
-If you would like to name your database something else, you will need to change `prime_app` to the name of your new database name in `server/modules/pool.js`
-
-## Development Setup Instructions
-
-* Run `npm install`
-* Create a `.env` file at the root of the project and paste this line into the file:
+## Installation
+1. Create a database named ```deal_reel```,
+1. The queries in the ```database.sql``` file are set up to create all the necessary tables and populate the needed data to allow the application to run correctly. The project is built on [Postgres](https://www.postgresql.org/download/),so make sure to have that installed. It is recommended that you also use [Postico](https://eggerapps.at/postico/) to run those queries as that was used to create the queries,
+1. Open your editor of choice and run an ```npm install```
+1.  Create a `.env` file at the root of the project and paste this line into the file:
     ```
-    SERVER_SESSION_SECRET=superDuperSecret
+    SERVER_SESSION_SECRET=random string
     ```
-    While you're in your new `.env` file, take the time to replace `superDuperSecret` with some long random string like `25POUbVtx6RKVNWszd9ERB9Bb6` to keep your application secure. Here's a site that can help you: [https://passwordsgenerator.net/](https://passwordsgenerator.net/). If you don't do this step, create a secret with less than eight characters, or leave it as `superDuperSecret`, you will get a warning.
-* Start postgres if not running already by using `brew services start postgresql`
-* Run `npm run server`
-* Run `npm run client`
-* Navigate to `localhost:3000`
+    *You should replace the **"random string"** with a long random string to keep application secure* 
+1. You will also need to put
+ your Google API key in the `.env` file. 
+ It should look something like: 
+    ```
+    GOOGLE_API=YOUR API KEY
+    ```
+1. Run ```npm run server``` in your terminal
+1. Run ```npm run client``` in your terminal
+1. The ```npm run client``` command will open up a new browser tab for you!
 
-## Debugging
+## Usage
 
-To debug, you will need to run the client-side separately from the server. Start the client by running the command `npm run client`. Start the debugging server by selecting the Debug button.
+##### Patron User
+1. Navigate to the DealReel site.
+1. Upon arrival, you will be asked if it's okay to use your location to locate nearby live deals. Press ```Allow``` to let the application find live deals near you. 
+1. After you allow the site to use your location, wait a couple seconds for the application to populate the page with a live feed of all the active deals within your vicinity. 
+1. If there are active deals in your area, the page will load a list of those deals in the form of different "deal cards".
+1. If there are no active deals happening near you, the page will have a header at the top stating "No Deals Happening Near You At This Time" 
 
-![VSCode Toolbar](documentation/images/vscode-toolbar.png)
+##### Business User
+1. Follow directions 1-5 of *"Patron User"* above.
+1. Click  the ```GO TO YOUR DEALS``` button underneath the "Already a Member?" heading at the top of the page. You will be taken to a login page.
+1. If you have already registered, login your user info here and click the ```Login``` button, which will navigate you to a *"Your Deals"* page. 
+    *This page will show you a list of all of the deals your establishment has ever set and their details (including both the past and future)*.
 
-Then make sure `Launch Program` is selected from the dropdown, then click the green play arrow.
+    Jump to step 8 once logged in.
 
-![VSCode Debug Bar](documentation/images/vscode-debug-bar.png)
+1. If you haven't already registered, click the ```Register``` button towards the bottom of the page
+1. Fill out your business info in the places provided. Make sure that your establishment name and address (street, city, state) are valid!
+1. Click the ```Register``` button towards the bottom.
+1. Once registered, you should be taken to the *"Your Deals"* page. This page will let you know that you haven't set any deals yet.
+1. Now that you are registered and logged in. The Navigation Bar will consist of: 
+- *Deals Near You* (list of live deals feed that all users can see), 
+- *Your Deals* (all deals you've set),
+- *Add Deal* (where you can set and add a deal to the live *Deals Near You* feed), 
+- *Log Out*, and 
+- *About*
+9. To add a deal to the the live feed for everyone in your area to see, click on the ```Add Deal``` tab on the Navigation Bar.  
+10. In the inputs provided, 
+- Enter a start datetime (*when your deal will start*) and an end datetime (*when your deal will end*) for your deal.  This is the time frame your deal will be broadcasted on the live feed for everyone to see.
+- Enter a description of your deal (*this should be as brief as possible!*)
+- Enter a redemptions limit if you have one.
+- Click the ```Add Deal``` button under the input areas.
 
+11. If you added a deal successfully, you will be alerted with a checkmark.
+12. From here, you can click the "*Deals Near You*" tab in the Navigation Bar to view your deal in the live feed that your patrons can see.
 
-## Testing Routes with Postman
+## Built With
+This application uses React, Redux, Express, Passport, and PostgreSQL, and the [Google Distance Matrix API](https://developers.google.com/maps/documentation/distance-matrix/intro) (a full list of dependencies can be found in `package.json`).
 
-To use Postman with this repo, you will need to set up requests in Postman to register a user and login a user at a minimum. 
-
-Keep in mind that once you using the login route, Postman will manage your session cookie for you just like a browser, ensuring it is sent with each subsequent request. If you delete the `localhost` cookie in Postman, it will effectively log you out.
-
-1. Start the server - `npm run server`
-2. [Import the sample routes JSON file](./PostmanPrimeSoloRoutes.json) by clicking `Import` in Passport. Select the file.
-3. Click `Collections` and `Send` the following three calls in order:
-    1. `POST /api/user/register` registers a new user, see body to change username/password
-    2. `POST /api/user/login` will login a user, see body to change username/password
-    3. `GET /api/user` will get user information, by default it's not very much
-
-After running the login route above, you can try any other route you've created that requires a logged in user!
-
-
-## Production Build
-
-Before pushing to Heroku, run `npm run build` in terminal. This will create a build folder that contains the code Heroku will be pointed at. You can test this build by typing `npm start`. Keep in mind that `npm start` will let you preview the production build but will **not** auto update.
-
-* Start postgres if not running already by using `brew services start postgresql`
-* Run `npm start`
-* Navigate to `localhost:5000`
-
-## Lay of the Land
-
-* `src/` contains the React application
-* `public/` contains static assets for the client-side
-* `build/` after you build the project, contains the transpiled code from `src/` and `public/` that will be viewed on the production site
-* `server/` contains the Express App
-
-This code is also heavily commented. We recommend reading through the comments, getting a lay of the land, and becoming comfortable with how the code works before you start making too many changes. If you're wondering where to start, consider reading through component file comments in the following order:
-
-* src/components
-  * App/App
-  * Footer/Footer
-  * Nav/Nav
-  * AboutPage/AboutPage
-  * InfoPage/InfoPage
-  * UserPage/UserPage
-  * LoginPage/LoginPage
-  * RegisterPage/RegisterPage
-  * LogOutButton/LogOutButton
-  * ProtectedRoute/ProtectedRoute
-
-## Deployment
-
-1. Create a new Heroku project
-1. Link the Heroku project to the project GitHub Repo
-1. Create an Heroku Postgres database
-1. Connect to the Heroku Postgres database from Postico
-1. Create the necessary tables
-1. Add an environment variable for `SERVER_SESSION_SECRET` with a nice random string for security
-1. In the deploy section, select manual deploy
-
-## Update Documentation
-
-Customize this ReadMe and the code comments in this project to read less like a starter repo and more like a project. Here is an example: https://gist.github.com/PurpleBooth/109311bb0361f32d87a2
+## Acknowledgement
+I want to thank Prime Digital Academy for guiding me through the process of taking an idea and implementing it into a functional application.
+## Support
+If you have any suggestions or issues, please email me at beckerluke1@gmail.com
