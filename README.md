@@ -3,15 +3,15 @@
 ## Description
 *Duration: 2 week sprint*
 
-#####Patron Side
+##### Patron Side
 DealReel is a web application platform meant to help patrons surf a live feed of posted deals from nearby establishments based on their location (using geolocation)
 
-#####Business Establishment Side
+##### Business Establishment Side
 On the other end, the DealReel is also meant to be used by business establishments to post real-time deals to this live feed, viewable to all nearby patrons within a 30 mile radius of that establishment (using Google Distance Matrix API)
 
 The application gives an establishment the ability to broadcast live deals fast to a more targeted market of patrons within their proximity.
 
-#####Overall
+##### Overall
 
 The application is meant to enhance communication efficiency between business establishments and target patrons within their proximity when it comes to deal promotions. DealReel is a one-stop-shop platform for these patrons to surf all active deals in their area.
 
