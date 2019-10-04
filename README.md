@@ -15,6 +15,8 @@ The application gives an establishment the ability to broadcast live deals fast 
 
 The application is meant to enhance communication efficiency between business establishments and target patrons within their proximity when it comes to deal promotions. DealReel is a one-stop-shop platform for these patrons to surf all active deals in their area.
 
+To see the fully functional site, please visit: [DealReel](https://sleepy-beyond-06909.herokuapp.com/#/home)
+
 #### Prerequisites
 - [Node.js](https://nodejs.org/en/)
 - [PostrgeSQL](https://www.postgresql.org/)
