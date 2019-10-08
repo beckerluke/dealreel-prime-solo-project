@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import { Button } from '@material-ui/core/';
-import moment from 'moment';
+import moment from 'moment-timezone';
 
 import './LandingPage.css';
 
@@ -59,8 +59,8 @@ class LandingPage extends Component {
                     <h2>{dealCard.description}</h2>
                     <h3>{dealCard.business_name}</h3>
                     <h4>{dealCard.address}</h4>
-                    <p>ends {moment(dealCard.end_time).fromNow()}</p>
-                    <p>From {moment(dealCard.start_time).format('LTS')} to {moment(dealCard.end_time).format('LTS')}</p>
+                    <p>ends {moment(dealCard.end_time).tz('America/Chicago').fromNow()}</p>
+                    <p>From {moment(dealCard.start_time).tz('America/Chicago').format('LTS')} to {moment(dealCard.end_time).tz('America/Chicago').format('LTS')}</p>
                     <p>Redemptions Remaining: {dealCard.redemptions_limit}</p>
                     <p>{dealDistance} miles away</p>
                 </div>
@@ -71,7 +71,7 @@ class LandingPage extends Component {
         return (
             <div className="container">
                 <h2>{this.state.heading}</h2>
-                <h3>{moment().format('LLLL')}</h3>
+                <h3>{moment().tz('America/Chicago').format('LLLL')}</h3>
                 <div className="grid-col grid-col_4">
                         <Button
                             variant="outlined"
@@ -80,7 +80,7 @@ class LandingPage extends Component {
                         >
                             Go To Your Deals
                         </Button>
-                    </div>
+                </div>
                 <div className="grid">
                     <div className="grid-col grid-col_8">
                         {allDeals}

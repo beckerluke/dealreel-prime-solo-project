@@ -1,8 +1,8 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
-const moment = require('moment');
 const axios = require('axios');
+const moment = require('moment-timezone');
 
 /**
  * GET all active deals from database
@@ -16,8 +16,8 @@ router.get('/', (req, res) => {
                     AND "end_time" <= $2
                     ORDER BY "user"."id", "end_time" DESC;`;
 
-    const currentDateTime = moment().format();
-    const cutOffDate = moment().add(8, 'hours');
+    const currentDateTime = moment().tz("America/Chicago").format();
+    const cutOffDate = moment().tz("America/Chicago").add(8, 'hours');
 
     // Retrieve all deals from DB where end time is greater than the 
     // current date time and less than current date time plus 8 hours
@@ -123,8 +123,8 @@ router.post('/admin/add/deal', (req, res) => {
                             "description", "user_id", "redemptions_limit")
                             VALUES ($1, $2, $3, $4, $5);`;
             const queryValues = [
-                newDeal.startTime,
-                newDeal.endTime,
+                moment(newDeal.startTime).tz('America/Chicago').format(),
+                moment(newDeal.endTime).tz('America/Chicago').format(),
                 newDeal.description,
                 dealID,
                 parseInt(newDeal.redemptionsLimit)

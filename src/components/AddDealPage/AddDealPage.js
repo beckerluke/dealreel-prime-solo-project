@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import {TextField} from '@material-ui/core';
-import moment from 'moment';
+import moment from 'moment-timezone';
 import Swal from 'sweetalert2';
 
 class AddDeal extends Component {
     state = {
-        startTime: moment().format('YYYY-MM-DDTkk:mm'),
+        startTime: moment().tz('America/Chicago').format('YYYY-MM-DDTkk:mm'),
         endTime: '',
         description: '',
         redemptionsLimit: 0,
