@@ -2,7 +2,8 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 const axios = require('axios');
-const moment = require('moment-timezone');
+// const moment = require('moment-timezone');
+const moment = require('moment');
 
 /**
  * GET all active deals from database
@@ -16,8 +17,8 @@ router.get('/', (req, res) => {
                     AND "end_time" <= $2
                     ORDER BY "user"."id", "end_time" DESC;`;
 
-    const currentDateTime = moment().tz("America/Chicago").format();
-    const cutOffDate = moment().tz("America/Chicago").add(8, 'hours');
+    const currentDateTime = moment().format();
+    const cutOffDate = moment().add(8, 'hours');
 
     // Retrieve all deals from DB where end time is greater than the 
     // current date time and less than current date time plus 8 hours
@@ -45,23 +46,28 @@ router.get('/', (req, res) => {
 
       // send axios request to GOOGLE DISTANCE MATRIX API
       axios.get(googleQuery).then((response) => {
+        //   console.log('THIS IS RESPONSE FROM GOOG: ', response);
         
         // Response from Google: the user's origin location
         const originLocation = response.data.rows[0];
         
         // all of the active deals locations
         const destinations = originLocation.elements;
-
+        console.log('response.data.rows[0].elements: ', destinations);
         // mapping over all active deals and adding distance data from 
         // Google Distance Matrix to each dealItem to capture deal's 
         // distance from user
         const dealsWithDistance = activeDeals.map((deal, index) => {
+            console.log('dealsWithDistance: ', deal)
             const distance = destinations[index].distance;
+            console.log('distance: ', distance);
             return {
                 ...deal,
                 distance,
             };
         })
+
+        console.log('dealsWithDistance ', dealsWithDistance);
 
         // send back new array holding distance data from Google to 
         // deals saga
@@ -123,8 +129,8 @@ router.post('/admin/add/deal', (req, res) => {
                             "description", "user_id", "redemptions_limit")
                             VALUES ($1, $2, $3, $4, $5);`;
             const queryValues = [
-                moment(newDeal.startTime).tz('America/Chicago').format(),
-                moment(newDeal.endTime).tz('America/Chicago').format(),
+                newDeal.startTime,
+                newDeal.endTime,
                 newDeal.description,
                 dealID,
                 parseInt(newDeal.redemptionsLimit)

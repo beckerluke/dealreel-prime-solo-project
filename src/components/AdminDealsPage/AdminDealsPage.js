@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
-import moment from 'moment-timezone';
+// import moment from 'moment-timezone';
+import moment from 'moment';
 
 class AdminDealsPage extends Component {
     state = {
@@ -23,12 +24,13 @@ class AdminDealsPage extends Component {
 
         const allAdminDealsList = allAdminDeals.map((dealCard, index) => {
             return (
+                
                 // this will be the deal cards and eventually be made their own component
                 <div className="dealCard" key={index}>
                     <h2>{dealCard.description}</h2>
-                    <p>Set: {moment(dealCard.start_time).tz('America/Chicago').fromNow()}</p>
-                    <p>{moment(dealCard.start_time).tz('America/Chicago').format('MMM Do YYYY, h:mm:ss a')}</p>
-                    <p>{moment(dealCard.end_time).tz('America/Chicago').format('MMM Do YYYY, h:mm:ss a')}</p>
+                    <p>Set: {moment(dealCard.start_time).fromNow()}</p>
+                    <p>{moment(dealCard.start_time).format('MMM Do YYYY, h:mm:ss a')}</p>
+                    <p>{moment(dealCard.end_time).format('MMM Do YYYY, h:mm:ss a')}</p>
                     <p>Redemptions Limit: {dealCard.redemptions_limit}</p>
                 </div>
             )
