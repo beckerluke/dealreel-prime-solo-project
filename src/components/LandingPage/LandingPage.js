@@ -5,9 +5,10 @@ import { Button } from '@material-ui/core/';
 import moment from 'moment';
 
 import './LandingPage.css';
+import DistanceFilter from './DistanceFilter/DistanceFilter';
 
 // Max Proximity That User Will Be Able to View Deals From (in meters)
-const FARTHEST_DIST = 35200;
+const FARTHEST_DIST = 32186.9;
 
 class LandingPage extends Component {
     state = {
@@ -35,6 +36,10 @@ class LandingPage extends Component {
                     >
                         Go To Your Deals
                     </Button>
+                    <DistanceFilter 
+                        FARTHEST_DIST={FARTHEST_DIST} 
+                    >Filter Distance Proximity
+                    </DistanceFilter>
                 </div>
             )
         }
