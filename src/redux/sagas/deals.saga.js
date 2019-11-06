@@ -1,7 +1,7 @@
 import { put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 import geoLocation from '../../services/GetLocation/GetLocation';
-import moment from 'moment-timezone';
+// import moment from 'moment-timezone';
 
 // will fire off on FETCH_ALL_DEALS
 function* fetchAllDeals() {
