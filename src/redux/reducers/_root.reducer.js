@@ -16,7 +16,7 @@ const rootReducer = combineReducers({
   loginMode, // will have a value of 'login' or 'registration' to control which screen is shown
   user, // will have an id and username if someone is logged in
   deals, // will have an array of all the deals 
-  adminDeals,
+  adminDeals, // will have an array of all that business's past and present deals
 });
 
 export default rootReducer;

@@ -11,6 +11,7 @@ class DealCard extends Component {
 
     render() {
         const dealCard = this.props.dealCard;
+        
         if(dealCard.redemptions_limit === 0) {
             dealCard.redemptions_limit = 'Unlimited';
         }

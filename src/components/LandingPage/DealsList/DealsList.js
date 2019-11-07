@@ -10,9 +10,8 @@ class DealsList extends Component {
     };
 
     render() {
-
-        // maps through the array of filtered deal objects
-        const allDeals = this.props.closestDeals.map((dealCard, index) => {
+        // maps through deals filtered by distance
+        const allDeals = this.props.filteredDeals.map((dealCard, index) => {
             return (<DealCard key={index} dealCard={dealCard}/>)
         });
 

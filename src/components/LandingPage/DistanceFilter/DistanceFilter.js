@@ -7,28 +7,40 @@ import DealsList from '../DealsList/DealsList';
 class DistanceFilter extends Component {
     state = {
         FARTHEST_DIST: 32186.9,
+        filteredDeals: [],
     };
+
+    componentDidMount() {
+        this.props.dispatch({type: 'FETCH_ALL_DEALS'});
+        this.filterDeals();
+    }
 
     handleChangeDistance(event, dataKey) {
         this.setState({
             [dataKey]: parseInt(event.target.value)
         }, () => {
-            console.log(this.state);
+            this.props.dispatch({type: 'FETCH_ALL_DEALS'});
+            this.filterDeals();
         })
+        
     }
 
-    render() {
-        const iconStylesCheck = {
-            color: "green"
-          };
-          const iconStylesX = {
-            color: "red"
-          };
+    filterDeals() {
         
         // filters all active deals by distance away from user
         const closestDeals = this.props.store.deals.filter((deal, index) => {
             return deal.distance.value <= this.state.FARTHEST_DIST
         });
+
+        this.setState({
+            filteredDeals: closestDeals,
+        }, () => {
+            console.log(this.state);
+        })
+        
+    }
+
+    render() {
 
         return (
             <div>
@@ -52,7 +64,8 @@ class DistanceFilter extends Component {
                         </Select>
                     </div>
                 </FormControl>
-                <DealsList closestDeals={closestDeals} /> 
+                <DealsList filteredDeals={this.state.filteredDeals}/>
+                
             </div>
         );
     }
