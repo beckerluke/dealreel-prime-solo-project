@@ -69,6 +69,10 @@ router.get('/', (req, res) => {
 
         console.log('dealsWithDistance ', dealsWithDistance);
 
+        // const googleQueryForUserTimezone = `https://maps.googleapis.com/maps/api/timezone/json?location=${userLatitude},${userLongitude}&timestamp=1458000000&key=${process.env.GOOGLE_API}
+        // `
+        // axios.get({})
+
         // send back new array holding distance data from Google to 
         // deals saga
         res.send(dealsWithDistance);

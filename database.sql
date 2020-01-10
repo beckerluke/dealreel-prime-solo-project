@@ -11,8 +11,8 @@ CREATE TABLE "user" (
 
 CREATE TABLE "deals" (
     "id" SERIAL PRIMARY KEY,
-    "start_time" timestamp without time zone,
-    "end_time" timestamp without time zone,
+    "start_time" timestamp with time zone NOT NULL,
+    "end_time" timestamp with time zone NOT NULL,
     "description" character varying(200) NOT NULL,
     "user_id" integer REFERENCES user(id),
     "redemptions_limit" integer NOT NULL DEFAULT 0,

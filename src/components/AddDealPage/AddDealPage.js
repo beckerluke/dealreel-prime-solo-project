@@ -18,6 +18,8 @@ class AddDeal extends Component {
     handleInputChangeFor = propertyName => (event) => {
         this.setState({
           [propertyName]: event.target.value,
+        }, () => {
+            console.log(this.state);
         });
       }
     
@@ -53,8 +55,8 @@ class AddDeal extends Component {
 
         this.props.dispatch({type: 'ADD_DEAL', 
             payload: {
-                startTime: this.state.startTime,
-                endTime: this.state.endTime,
+                startTime: moment.utc(this.state.startTime).format(),
+                endTime: moment.utc(this.state.endTime).format(),
                 description: this.state.description,
                 redemptionsLimit: this.state.redemptionsLimit,
                 imageFileSelected: this.state.imageFileSelected
